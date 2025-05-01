@@ -15,7 +15,8 @@ export class MemoryStorage implements IStorage {
     public async getItem(key: string): Promise<ICacheItem | undefined> {
         let response;
         if(this.shouldClone){
-            response = JSON.parse(JSON.stringify(this.memCache[key]));
+            const cacheData = this.memCache[key];
+            response = cacheData?JSON.parse(JSON.stringify(this.memCache[key])):cacheData;
         }else{
             response = this.memCache[key]
         }
